@@ -93,7 +93,7 @@ function prompt() {
 // employees 
 function viewAllEmployees() {
     let query = 
-        SELECT
+        `SELECT
             employee.id,
             employee.first_name,
             employee.last_name,
@@ -105,7 +105,7 @@ function viewAllEmployees() {
             LEFT JOIN employee manager on manager.id = employee.manager_id
             INNER JOIN role ON (role.id = employee.role_id)
             INNER JOIN department ON (department.id = role.department_id)
-            ORDER BY employee.id;
+            ORDER BY employee.id;`
             connection.query(query, (err, res) => {
                 if (err) throw err;
                 console.log('\n');
@@ -118,7 +118,7 @@ function viewAllEmployees() {
 
 function viewByDepartment() {
     let query = 
-        SELECT 
+        `SELECT 
             department.name AS department,
             role.title,
             employee.id,
@@ -127,7 +127,7 @@ function viewByDepartment() {
             FROM employee
             LEFT JOIN role ON (role.id = employee.role_id)
             LEFT JOIN department ON (department.id = role.department_id)
-            ORDER BY department.name;
+            ORDER BY department.name;`
             connection.query(query, (err, res) => {
                 if (err) throw err;
                 console.log('\n');
@@ -140,7 +140,7 @@ function viewByDepartment() {
 
 function viewByManager() {
     let query = 
-        SELECT 
+        `SELECT 
         CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
         department.name AS department, 
         employee.id, 
@@ -151,7 +151,7 @@ function viewByManager() {
         LEFT JOIN employee manager on manager.id = employee.manager_id
         INNER JOIN role ON (role.id = employee.role_id && employee.manager_id != 'NULL')
         INNER JOIN department ON (department.id = role.department_id)
-        ORDER BY manager;
+        ORDER BY manager;`
         connection.query(query, (err, res) => {
             if (err) throw err;
             console.log('\n');
