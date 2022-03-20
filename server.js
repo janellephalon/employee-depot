@@ -116,7 +116,7 @@ function viewAllEmployees() {
         });
     }
 
-    // View by Departments
+// View by Departments
 function viewByDepartment() {
     let query = 
         `SELECT 
@@ -191,15 +191,57 @@ function viewAllRoles() {
 }
 
 // Add Employee 
-async function addEmployee() {
-    let addname = await inquirer.prompt(askName());
-    connection.query(
+function addEmployee() {
+    let query = 
         `SELECT 
             role.id,
             role.title,
             role.salary
-        FROM role`
-    );
+        FROM role`;
 
+connection.query(query,(err, res) => {
+    if(err)throw err;
 
+const role = res.map(({ id, title, salary }) => ({
+    value: id, 
+    title: `${title}`, 
+    salary: `${salary}`
+}));
+    
+console.table(res);
+employeeRoles(role);
+
+});
+}
+      
+function employeeRoles(role) {
+    inquirer
+    .prompt([
+    {
+        type: "input",
+        name: "firstName",
+        message: "Employee First Name: "
+    },
+    {
+        type: "input",
+        name: "lastName",
+        message: "Employee Last Name: "
+    },
+    {
+        type: "list",
+        name: "roleId",
+        message: "Employee Role: ",
+        choices: role
+    }
+    ]).then((res) => {
+        let query = `INSERT INTO employee SET ?`
+        connection.query(query,{
+            first_name: res.firstName,
+            last_name: res.lastName,
+            role_id: res.roleId
+        },(err, res)=>{
+            if(err) throw err;
+            firstPrompt();
+        });
+    });
 }
