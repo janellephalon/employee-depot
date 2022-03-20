@@ -140,7 +140,8 @@ function viewByDepartment() {
 
 function viewByManager() {
     let query = 
-        SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
+        SELECT 
+        CONCAT(manager.first_name, ' ', manager.last_name) AS manager,
         department.name AS department, 
         employee.id, 
         employee.first_name, 
