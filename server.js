@@ -181,6 +181,25 @@ function viewAllRoles() {
         ORDER BY role.title;`;
 
         connection.query(query, (err, res) => {
-            if (err) throw err; 
-        }
-    }
+            if (err) throw err;
+
+            console.log('VIEW EMPLOYEE BY ROLE');
+            console.table(res);
+
+            prompt();
+        });
+}
+
+// Add Employee
+async function addEmployee() {
+    let addEmployeeName = await inquirer.prompt(askEmployeeName());
+    connection.query('SELECT role.id, role.title FROM role ORDER BY role.id;', async (err, res) => {
+        if (err) throw err;
+        const { role } = await inquirer.prompt([
+            {
+                name: 'role',
+                type: 'list',
+                choices: () => res.map (res => res.title),
+                message: 'Employee Role: '
+            }
+        ]);
