@@ -202,4 +202,6 @@ async function addEmployee() {
                 choices: () => res.map (res => res.title),
                 message: 'Employee Role: '
             }
-        ]);
+        ])
+    });
+}
