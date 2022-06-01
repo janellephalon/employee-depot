@@ -43,14 +43,13 @@ THEN I am prompted to select an employee to update and their new role and this i
 ```
 
 ## Installation
-`npm init` <br>
 `npm install`
 
 ## Usage
 `npm start`
 
 ## Demo 
-[Walkthrough Video to Demonstrate Functionality]()
+[Walkthrough Video to Demonstrate Functionality](https://drive.google.com/file/d/1P1im5rW1OWZ0fG9WX3gALWN9O3FgWV4X/view?usp=sharing)
 
 ## Contributors
 Janelle Phalon - [Github](https://github.com/janellephalon) <br>
